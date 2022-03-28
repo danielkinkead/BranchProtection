@@ -3,25 +3,25 @@ using namespace System.Net
 # Input bindings are passed in via param block.
 param($Request, $TriggerMetadata)
 
-# Write to the Azure Functions log stream.
-Write-Host "PowerShell HTTP trigger function processed a request."
-
-$Request = $Request.Body # Setting the request to the body of the payload
+# Defining variables
+$Request = $Request.Body # Setting request to the body of the payload
 $action  = $Request.action # What action did the log show?
 $username = "testdkinkead" # Set the username of the GitHub user we want to mention in the issue
 $ghOrg = "danielkinkead" # Set the GitHub organization
+$ghToken = $env:ghToken # This is pulling the GitHub token from the Application Settings in Azure
+$ghRepoName = $Request.repository.name # Set the repo name
+
+# Write to the Azure Functions log stream.
+Write-Host "PowerShell HTTP trigger function processed a request."
 Write-Host "Action Type:" $Request.action # What type of event is this?
 Write-Host "Repository Name:" $Request.repository.name # What is the repo name?
 Write-Host "Private Repository:" $Request.repository.private # Is this a private repo?
 
 # Header for GitHub API
-$ghToken = $env:ghToken # This is pulling the GitHub token from the Application Settings in Azure
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]" # Setting up the object for the headers
-$headers.Add("Accept", "application/vnd.github.v3+json") # This is the recommended accept statement according to the GitHub docs to use the REST API
+$headers.Add("Accept", "application/vnd.github.v3+json") # This is the recommended accept statement from GitHub docs to use the REST API and have it return json
 $headers.Add("Authorization", "Basic $ghToken") # Add the auth token
 $headers.Add("Content-Type", "application/json") # Setting the content-type
-
-$ghRepoName = $Request.repository.name # Setting the repo name
 
 # This function configures the branch protection by requiring a pull request where one approver is required and the restrictions are all applied to administrators
 function ConfigureBranchProtection {
