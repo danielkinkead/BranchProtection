@@ -9,6 +9,7 @@ Write-Host "PowerShell HTTP trigger function processed a request."
 $Request = $Request.Body # Setting the request to the body of the payload
 $action  = $Request.action # What action did the log show?
 $username = "testdkinkead" # Set the username of the GitHub user we want to mention in the issue
+$ghOrg = "danielkinkead" # Set the GitHub organization
 Write-Host "Action Type:" $Request.action # What type of event is this?
 Write-Host "Repository Name:" $Request.repository.name # What is the repo name?
 Write-Host "Private Repository:" $Request.repository.private # Is this a private repo?
@@ -37,7 +38,7 @@ function ConfigureBranchProtection {
     `n}"
     
 # Sending response to GitHub API
-    $response = Invoke-RestMethod "https://api.github.com/repos/danielkinkead/$ghRepoName/branches/main/protection" -Method 'PUT' -Headers $headers -Body $bodyConfigureProtection
+    $response = Invoke-RestMethod "https://api.github.com/repos/$ghOrg/$ghRepoName/branches/main/protection" -Method 'PUT' -Headers $headers -Body $bodyConfigureProtection
     $response | ConvertTo-Json
 }
 
@@ -50,7 +51,7 @@ function DummyCommit {
     `n}"
 
 # Sending response to GitHub API
-    $response = Invoke-RestMethod "https://api.github.com/repos/danielkinkead/$ghRepoName/contents/README.md" -Method 'PUT' -Headers $headers -Body $bodyDummyCommit
+    $response = Invoke-RestMethod "https://api.github.com/repos/$ghOrg/$ghRepoName/contents/README.md" -Method 'PUT' -Headers $headers -Body $bodyDummyCommit
     $response | ConvertTo-Json
 }
 
@@ -62,7 +63,7 @@ function CreateIssue {
     `n}"
 
 # Sending response to GitHub API
-    $response = Invoke-RestMethod "https://api.github.com/repos/danielkinkead/$ghRepoName/issues" -Method 'POST' -Headers $headers -Body $bodyCreateIssue
+    $response = Invoke-RestMethod "https://api.github.com/repos/$ghOrg/$ghRepoName/issues" -Method 'POST' -Headers $headers -Body $bodyCreateIssue
     $response | ConvertTo-Json
 }
 if ($action -eq "created") # Checking to see if a repo has been created
