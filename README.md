@@ -50,7 +50,7 @@ For this issue I am using an Azure Function App to capture the webhook and run s
 ## References
 * https://www.wesleyhaakman.org/using-azure-functions-to-configure-github-branch-protection/
 * https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
-* https://docs.microsoft.com/en-us/azure/azure-functions/functions-get-started?pivots=programming-language-powershell&WT.mc_id=AZ-MVP-5003649
+* https://docs.microsoft.com/en-us/azure/azure-functions/functions-get-started?pivots=programming-language-powershell
 * https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api
 * https://www.base64encode.org/
  
