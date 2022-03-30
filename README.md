@@ -28,7 +28,7 @@ For this issue I am using an Azure Function App to capture the webhook and run s
    * The name will be `ghToken` and the value will be your `GitHub username:Personal Access Token` that has been encoded in base64 and then click `OK`
    * Click on `Save` near the top of the screen and then click on `Continue`
    * Click on `Functions` and then click on `Create`
-   * Select `HTTP trigger` under the "Select a template" header and click on `Create'
+   * Select `HTTP trigger` under the "Select a template" header and click on `Create`
    * Click on `Get Function URL` near the top of the screen and copy the URL that it provides you
    * Click on `Code + Test` under "Developer" near the left hand side
    * Verify the dropdown is on `run.ps1` and then replace the contents of that file with the contents from my repo
